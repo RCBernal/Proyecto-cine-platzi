@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: 'postgres:16.2'
+    container_name: cinePlatzi
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=peliculas
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=199824
+    ports:
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
