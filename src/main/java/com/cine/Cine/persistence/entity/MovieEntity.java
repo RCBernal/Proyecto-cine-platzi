@@ -1,16 +1,16 @@
 package com.cine.Cine.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@Data
 @Getter
 @Setter
-@Table(name = "platzi_play_peliculas")
+@Table(name ="platzi_play_peliculas")
 public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
