@@ -8,7 +8,7 @@ INSERT INTO platzi_play_peliculas (title, duration, gender, clasification, fecha
 
 INSERT INTO platzi_play_peliculas (title, duration, gender, clasification, fecha_estreno, state) VALUES ('El Conjuro', 112, 'TERROR', 3.0, '2013-07-19', 'D') ON CONFLICT (title) DO NOTHING;
 
-INSERT INTO platzi_play_peliculas (title, duration, gender, clasification, fecha_estreno, state) VALUES ('Coco', 105, 'ANIMADA', 4.7, '2017-10-27', 'D') ON CONFLICT (title) DO NOTHING;
+INSERT INTO platzi_play_peliculas (title, duration, gender, clasification, fecha_estreno, state) VALUES ('Coco', 105, 'ANIMADA', 4.7, '2017-10-27', 'N') ON CONFLICT (title) DO NOTHING;
 
 INSERT INTO platzi_play_peliculas (title, duration, gender, clasification, fecha_estreno, state) VALUES ('Interstellar', 169, 'CIENCIA_FICCION', 5.0, '2014-11-07', 'D') ON CONFLICT (title) DO NOTHING;
 

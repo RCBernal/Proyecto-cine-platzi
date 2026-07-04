@@ -1,22 +1,41 @@
 package com.cine.Cine.web.controller;
 
-import com.cine.Cine.persistence.crud.CrudMovieEntity;
-import com.cine.Cine.persistence.entity.MovieEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.cine.Cine.domain.dto.MovieDto;
+import com.cine.Cine.domain.dto.UpdateMovieDto;
+import com.cine.Cine.domain.service.MovieService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/movies")
 public class MovieController {
-    private final CrudMovieEntity crudMovieEntity;
+    private final MovieService movieService;
 
-    public MovieController(CrudMovieEntity crudMovieEntity) {
-        this.crudMovieEntity = crudMovieEntity;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
-    @GetMapping("/movies")
-    public List<MovieEntity> getAll() {
-        return (List<MovieEntity>) this.crudMovieEntity.findAll();
+    @GetMapping()
+    public ResponseEntity <List<MovieDto>> getAll() {
+        return ResponseEntity.ok(this.movieService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDto> getById(@PathVariable long id) {
+        MovieDto movieDto=this.movieService.getById(id);
+        return (movieDto==null) ? ResponseEntity.notFound().build(): ResponseEntity.ok(movieDto);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.movieService.addMovie(movieDto));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable long id,@RequestBody UpdateMovieDto updateMovieDto) {
+        return null;
     }
 }

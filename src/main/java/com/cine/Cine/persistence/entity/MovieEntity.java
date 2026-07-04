@@ -17,6 +17,7 @@ public class MovieEntity {
     private Long id;
 
     @Column(nullable = false, length = 150, unique = true)
+
     private String title;
 
     @Column(nullable = false,precision = 3)
