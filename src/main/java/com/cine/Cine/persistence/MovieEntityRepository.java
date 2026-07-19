@@ -3,6 +3,8 @@ package com.cine.Cine.persistence;
 import com.cine.Cine.domain.dto.MovieDto;
 import com.cine.Cine.domain.dto.UpdateMovieDto;
 import com.cine.Cine.domain.repository.MovieRepository;
+import com.cine.Cine.exception.MovieAlreadyExistException;
+import com.cine.Cine.exception.MovieNotExistException;
 import com.cine.Cine.persistence.crud.CrudMovieEntity;
 import com.cine.Cine.persistence.entity.MovieEntity;
 import com.cine.Cine.persistence.mapper.MovieMapper;
@@ -35,6 +37,9 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public MovieDto save(MovieDto movieDto) {
+        if (this.crudMovieEntity.findFirstByTitle(movieDto.tittle()) != null) {
+            throw new MovieAlreadyExistException(movieDto.tittle());
+        }
         MovieEntity movieEntity=this.movieMapper.toEntity(movieDto);
         return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
     }
@@ -43,14 +48,18 @@ public class MovieEntityRepository implements MovieRepository {
     public MovieDto updateMovie(Long id, UpdateMovieDto updateMovieDto) {
         MovieEntity movieEntity=this.crudMovieEntity.findById(id).orElse(null);
 
-        if(movieEntity==null)return null;
-        movieEntity.setTitle(updateMovieDto.tittle());
-        movieEntity.setReleaseDate(updateMovieDto.releaseDate());
-        movieEntity.setClasification(BigDecimal.valueOf(updateMovieDto.rating()));
-        movieEntity.setState(updateMovieDto.state());
+        if(movieEntity==null)throw new MovieNotExistException(id);
+        this.movieMapper.updateEntityFromDto(updateMovieDto,movieEntity);
 
-        return null;
+        return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
     }
 
+    @Override
+    public boolean deleteMovie(Long id) {
+        return this.crudMovieEntity.findById(id).map(movieEntity -> {
+            this.crudMovieEntity.delete(movieEntity);
+            return true;
+        }).orElse(false);
+    }
 
 }

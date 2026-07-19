@@ -1,0 +1,29 @@
+[33mcommit 0e9b7f67dab66d08cac25dbce8d9a989ba72bb95[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: RCBernal <carlosbuttec@gmail.com>
+Date:   Fri Jul 3 21:57:27 2026 -0600
+
+    Se realiza el metodo get y post
+
+[33mcommit d8bae270ee6aaf3f7315b9a8196e03b132f67327[m
+Author: RCBernal <carlosbuttec@gmail.com>
+Date:   Wed Jun 3 23:39:54 2026 -0600
+
+    Se crea moviecontroller e interface crudmovieentity para usar JPA
+
+[33mcommit 42b273beee0bd77e08018a99c7003485fe73ca6b[m
+Author: RCBernal <carlosbuttec@gmail.com>
+Date:   Sun May 17 11:58:17 2026 -0600
+
+    Se crea clase MovieEntity la cual creara o actualizara la tabla en mi bd
+
+[33mcommit d1393ced5311c5a51fedc3beeb57065ff375d7fc[m
+Author: RCBernal <carlosbuttec@gmail.com>
+Date:   Tue May 12 21:15:05 2026 -0600
+
+    creaciond e la clase MovieEntity en el package entity
+
+[33mcommit 994c0177f4ac6af064d2fe8772b531bdd1712f22[m
+Author: RCBernal <carlosbuttec@gmail.com>
+Date:   Tue May 12 21:06:14 2026 -0600
+
+    Primer avance del proyecto hasta la clase 6
