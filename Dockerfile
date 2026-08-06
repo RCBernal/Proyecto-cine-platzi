@@ -1,6 +1,6 @@
 #Etapa 1 Build con gradle  (compilacion)
 FROM gradle-9.4.1-jdk25 AS build
-COPY --chrown=gradle:gradle . /app
+COPY --chown=gradle:gradle . /app
 WORKDIR /app
 RUN gradle bootjar --no-daemmon
 
