@@ -56,8 +56,12 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public boolean deleteMovie(Long id) {
-        return this.crudMovieEntity.findById(id).map(movieEntity -> {
-            this.crudMovieEntity.delete(movieEntity);
+
+        MovieEntity movieEntity=this.crudMovieEntity.findById(id).orElse(null);
+        if(movieEntity==null)throw new MovieNotExistException(id);
+
+        return this.crudMovieEntity.findById(id).map(movieentity -> {
+            this.crudMovieEntity.delete(movieentity);
             return true;
         }).orElse(false);
     }
