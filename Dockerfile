@@ -1,12 +1,12 @@
-#Etapa 1 Build con gradle  (compilacion)
+# Etapa 1: Build con Gradle y JDK 25
 FROM gradle:9.4.1-jdk25 AS build
-COPY --chown=gradle:gradle . /app
 WORKDIR /app
-RUN gradle bootjar --no-daemmon
+COPY --chown=gradle:gradle . /app
+RUN gradle bootJar --no-daemon
 
-#Etapa 2Runtime con jdk 25 (Ejecucion)
+# Etapa 2: Runtime con Amazon Corretto 25
 FROM amazoncorretto:25-alpine
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar platzi_play.jar
+COPY --from=build /app/build/libs/*.jar platziplay.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "Cine-1.0.0.jar"]
